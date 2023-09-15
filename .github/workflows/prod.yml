@@ -26,6 +26,6 @@ jobs:
 
       - name: Build, tag, and push image to Amazon ECR,
         run: |
-          docker build -t hanghae . 
-          docker tag hanghae:latest 810177324512.dkr.ecr.us-east-1.amazonaws.com/hanghae:latest
-          docker push 810177324512.dkr.ecr.us-east-1.amazonaws.com/hanghae:latest
+          docker build -t hanghae_prod .
+          docker tag hanghae_prod:latest 810177324512.dkr.ecr.us-east-1.amazonaws.com/hanghae_prod:latest
+          docker push 810177324512.dkr.ecr.us-east-1.amazonaws.com/hanghae_prod:latest
