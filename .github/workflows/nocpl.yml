@@ -30,6 +30,7 @@ jobs:
           docker build -t hanghae_no_cpl .
           docker tag hanghae_no_cpl:latest 810177324512.dkr.ecr.us-east-1.amazonaws.com/hanghae_no_cpl:latest
           docker push 810177324512.dkr.ecr.us-east-1.amazonaws.com/hanghae_no_cpl:latest
+          echo "image=810177324512.dkr.ecr.us-east-1.amazonaws.com/hanghae_no_cpl:latest" >> $GITHUB_OUTPUT
 
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
