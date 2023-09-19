@@ -2,7 +2,7 @@ name: Deploy to ECR
 
 on:
   pull_request:
-    branches: ['nocpl']
+    branches: ['test']
 
 jobs:
   build:
@@ -13,11 +13,10 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
-      - name: Configure AWS credentials
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: arn:aws:iam::810177324512:role/hanghae-github-deploy-role
           aws-region: us-east-1
 
       - name: Login to Amazon ECR
