@@ -28,7 +28,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: ${{secret.AWS_DEPLOY_ROLE}}
+          role-to-assume: ${{ secret.AWS_DEPLOY_ROLE }}
           aws-region: us-east-1
 
       - name: Login to Amazon ECR
