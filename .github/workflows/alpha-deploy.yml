@@ -1,8 +1,12 @@
 name: Deploy to ECR
 
 on:
-  pull_request:
+  push:
     branches: ['alpha']
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read # This is required for actions/checkout
+
 env:
   AWS_REGION: us-east-1
   ECR_REGISTRY: 810177324512.dkr.ecr.us-east-1.amazonaws.com
