@@ -1,48 +1,60 @@
-name: Deploy to ECR
+# name: Deploy to ECR
 
-on:
-  pull_request:
-    branches: ['prod']
+# on:
+#   push:
+#     branches: ['prod']
+# permissions:
+#   id-token: write # This is required for requesting the JWT
+#   contents: read # This is required for actions/checkout
 
-jobs:
-  build:
-    name: Build Image
-    runs-on: ubuntu-latest
+# env:
+#   AWS_REGION: us-east-1
+#   ECR_REGISTRY: 810177324512.dkr.ecr.us-east-1.amazonaws.com
+#   ECR_REPOSITORY: hanghae_prod
+#   ECS_SERVICE: alphaService
+#   ECS_CLUSTER: alphaCluster
+#   ECS_TASK_DEFINITION: .aws/alpha-task-definition.json
+#   CONTAINER_NAME: alpha-container
 
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
+# jobs:
+#   build:
+#     name: Build Image
+#     runs-on: ubuntu-latest
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: arn:aws:iam::810177324512:role/hanghae-github-deploy-role
-          aws-region: us-east-1
+#     steps:
+#       - name: Check out code
+#         uses: actions/checkout@v2
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+#       - name: Configure AWS Credentials
+#         uses: aws-actions/configure-aws-credentials@v1
+#         with:
+#           role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE }}
+#           aws-region: us-east-1
 
-      - name: Build, tag, and push image to Amazon ECR,
-        id: build-image
-        run: |
-          docker build -t hanghae_no_cpl .
-          docker tag hanghae_no_cpl:latest 810177324512.dkr.ecr.us-east-1.amazonaws.com/hanghae_no_cpl:latest
-          docker push 810177324512.dkr.ecr.us-east-1.amazonaws.com/hanghae_no_cpl:latest
-          echo "image=810177324512.dkr.ecr.us-east-1.amazonaws.com/hanghae_no_cpl:latest" >> $GITHUB_OUTPUT
+#       - name: Login to Amazon ECR
+#         id: login-ecr
+#         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Fill in the new image ID in the Amazon ECS task definition
-        id: task-def
-        uses: aws-actions/amazon-ecs-render-task-definition@v1
-        with:
-          task-definition: .aws/task-definition.json
-          container-name: nocpl-container
-          image: ${{ steps.build-image.outputs.image }}
+#       - name: Build, tag, and push image to Amazon ECR,
+#         id: build-image
+#         run: |
+#           docker build -t hanghae_alpha .
+#           docker tag hanghae_alpha:latest $ECR_REGISTRY/$ECR_REPOSITORY:latest
+#           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+#           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:latest" >> $GITHUB_OUTPUT
 
-      - name: Deploy Amazon ECS task definition
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-        with:
-          task-definition: .aws/task-definition.json
-          service: nocplService
-          cluster: nocplCluster
-          wait-for-service-stability: true
+#       - name: Fill in the new image ID in the Amazon ECS task definition
+#         id: task-def
+#         uses: aws-actions/amazon-ecs-render-task-definition@v1
+#         with:
+#           task-definition: $ECS_TASK_DEFINITION
+#           container-name: $CONTAINER_NAME
+#           image: ${{ steps.build-image.outputs.image }}
+
+#       - name: Deploy Amazon ECS task definition
+#         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+#         with:
+#           task-definition: $ECS_TASK_DEFINITION
+#           service: $ECS_SERVICE
+#           cluster: $ECS_CLUSTER
+#           wait-for-service-stability: true

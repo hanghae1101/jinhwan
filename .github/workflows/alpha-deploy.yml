@@ -11,10 +11,10 @@ env:
   AWS_REGION: us-east-1
   ECR_REGISTRY: 810177324512.dkr.ecr.us-east-1.amazonaws.com
   ECR_REPOSITORY: hanghae_alpha
-  ECS_SERVICE: MY_ECS_SERVICE
+  ECS_SERVICE: alphaService
   ECS_CLUSTER: alphaCluster
   ECS_TASK_DEFINITION: .aws/alpha-task-definition.json
-  CONTAINER_NAME: MY_CONTAINER_NAME
+  CONTAINER_NAME: alpha-container
 
 jobs:
   build:
@@ -43,18 +43,18 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:latest" >> $GITHUB_OUTPUT
 
-      # - name: Fill in the new image ID in the Amazon ECS task definition
-      #   id: task-def
-      #   uses: aws-actions/amazon-ecs-render-task-definition@v1
-      #   with:
-      #     task-definition: $ECS_TASK_DEFINITION
-      #     container-name: $CONTAINER_NAME
-      #     image: ${{ steps.build-image.outputs.image }}
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: $ECS_TASK_DEFINITION
+          container-name: $CONTAINER_NAME
+          image: ${{ steps.build-image.outputs.image }}
 
-      # - name: Deploy Amazon ECS task definition
-      #   uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-      #   with:
-      #     task-definition: $ECS_TASK_DEFINITION
-      #     service: ECS_SERVICE
-      #     cluster: ECS_CLUSTER
-      #     wait-for-service-stability: true
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: $ECS_TASK_DEFINITION
+          service: $ECS_SERVICE
+          cluster: $ECS_CLUSTER
+          wait-for-service-stability: true
