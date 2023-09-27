@@ -13,7 +13,7 @@ env:
   ECR_REPOSITORY: hanghae_alpha
   ECS_SERVICE: alphaService
   ECS_CLUSTER: alphaCluster
-  ECS_TASK_DEFINITION: .aws/alpha-task-definition.json
+  ECS_TASK_DEFINITION: /.aws/alpha-task-definition.json
   CONTAINER_NAME: alpha-container
 
 jobs:
