@@ -12,7 +12,7 @@ env:
   ECR_REGISTRY: 810177324512.dkr.ecr.us-east-1.amazonaws.com
   ECR_REPOSITORY: hanghae_alpha
   ECS_SERVICE: MY_ECS_SERVICE
-  ECS_CLUSTER: MY_ECS_CLUSTER
+  ECS_CLUSTER: alphaCluster
   ECS_TASK_DEFINITION: .aws/alpha-task-definition.json
   CONTAINER_NAME: MY_CONTAINER_NAME
 
