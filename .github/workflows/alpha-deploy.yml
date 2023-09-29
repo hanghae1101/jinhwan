@@ -22,6 +22,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: ECS Task Definition check
+        run: echo $ECS_TASK_DEFINITION
+
       - name: Check out code
         uses: actions/checkout@v2
 
@@ -47,14 +50,14 @@ jobs:
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: $ECS_TASK_DEFINITION
-          container-name: $CONTAINER_NAME
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: $ECS_TASK_DEFINITION
-          service: $ECS_SERVICE
-          cluster: $ECS_CLUSTER
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }]
           wait-for-service-stability: true
