@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { CallPresentationModule } from './presentation/call.presentation.module';
+import { GetExpectedInfoHttpController } from './presentation/controllers/get.expected.info.http.controller';
 
 @Module({
-  imports: [CallPresentationModule],
+  imports: [GetExpectedInfoHttpController],
 })
 export class CallModule {}
