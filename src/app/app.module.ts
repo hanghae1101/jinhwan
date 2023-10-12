@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
-import { CallModule } from '../modules/call/call.module';
+import { FindWayModule } from '../find-way/find-way.module';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    CallModule,
+    FindWayModule,
     ConfigModule.forRoot({
       envFilePath: '.env',
       isGlobal: true,
