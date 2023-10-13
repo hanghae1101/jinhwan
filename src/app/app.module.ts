@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
-import { CallModule } from '../modules/call/call.module';
+import { FindWayModule } from '../find-way/find-way.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Bookmark } from '../find-way/entities/bookmark.entity';
 
 @Module({
   imports: [
-    CallModule,
+    FindWayModule,
     ConfigModule.forRoot({
       envFilePath: '.env',
       isGlobal: true,
@@ -19,8 +20,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: 'root',
       password: 'password',
       database: 'taxi',
-      entities: [],
-      // synchronize: true,
+      entities: [Bookmark],
+      synchronize: true,
     }),
   ],
   controllers: [AppController],
