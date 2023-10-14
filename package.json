@@ -10,6 +10,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "dev": "nest start --watch",
+    "dev:docker": "docker-compose -f docker-compose.yml up",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "gts lint",
