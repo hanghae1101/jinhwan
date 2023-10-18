@@ -4,11 +4,20 @@ import { IBookmark } from '../domain/bookmark.interface';
 @Injectable()
 export class BookmarkService {
   constructor(@Inject('Bookmark') private readonly bookmark: IBookmark) {}
+
   async getBookmarkList(): Promise<any> {
-    return this.bookmark.getAll();
+    try {
+      return await this.bookmark.getAll();
+    } catch (err) {
+      throw new Error(err);
+    }
   }
 
   async postBookmark(body): Promise<any> {
-    return this.bookmark.post(body);
+    try {
+      return await this.bookmark.post(body);
+    } catch {
+      throw new Error(err);
+    }
   }
 }
