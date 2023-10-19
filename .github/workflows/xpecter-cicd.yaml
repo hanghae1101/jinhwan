@@ -10,7 +10,7 @@ env:
   ECR_REPOSITORY: taxi-xpecter
   ECS_SERVICE: service-nestjs
   ECS_CLUSTER: cluster-nestjs
-  ECS_TASK_DEFINITION: ./aws/xpecter-task-definition.json
+  ECS_TASK_DEFINITION: .aws/xpecter-task-definition.json
   CONTAINER_NAME: nestjs
 
 permissions:
