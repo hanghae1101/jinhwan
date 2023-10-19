@@ -5,7 +5,7 @@ on:
     branches: ['xpecter/main']
 
 env:
-  AWS_REGION: us-east-1
+  AWS_REGION: us-east-2
   ECR_REGISTRY: 810177324512.dkr.ecr.us-east-2.amazonaws.com
   ECR_REPOSITORY: taxi-xpecter
   ECS_SERVICE: service-nestjs
