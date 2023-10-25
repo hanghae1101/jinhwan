@@ -19,8 +19,8 @@ jobs:
     name: Deploy to EC2
     runs-on: ubuntu-latest
 
-    env:
-      working-directory: ./apps/server
+    # env:
+    #   working-directory: .
 
     strategy:
       matrix:
@@ -36,7 +36,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: create env file
-        working-directory: ${{ env.working-directory }}
+        # working-directory: ${{ env.working-directory }}
         run: |
           pwd
           touch .env
