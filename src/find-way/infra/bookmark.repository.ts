@@ -1,24 +1,28 @@
 import { Injectable } from '@nestjs/common';
-import { DataSource, Repository } from 'typeorm';
+import { DataSource, DeepPartial, InsertResult, Repository } from 'typeorm';
 import { Bookmark } from '../entities/bookmark.entity';
 import { IBookmark } from '../domain/bookmark.interface';
 
 @Injectable()
-export class BookmarkRepository
-  extends Repository<Bookmark>
-  implements IBookmark
-{
-  constructor(private dataSource: DataSource) {
-    super(Bookmark, dataSource.createEntityManager());
-  }
+export class BookmarkRepository extends Repository<Bookmark> implements IBookmark {
+	constructor(private dataSource: DataSource) {
+		super(Bookmark, dataSource.createEntityManager());
+	}
 
-  async post(body): Promise<any> {
-    const res = await this.insert(body);
-    return res;
-  }
+	async post(body: DeepPartial<Bookmark>): Promise<Bookmark> {
+		const res = await this.create(body);
 
-  async getAll(): Promise<any> {
-    const res = await this.find();
-    return res;
-  }
+		return res;
+	}
+
+	async getAll(): Promise<Bookmark[]> {
+		const res = await this.find();
+		console.log(res);
+		return res;
+	}
+
+	async deleteOne(id: number): Promise<any> {
+		const res = await this.delete(id);
+		return res;
+	}
 }
