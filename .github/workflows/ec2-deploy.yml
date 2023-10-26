@@ -47,24 +47,23 @@ jobs:
 
           cat .env
 
-      # - name: zip file
-      #   working-directory: ./
-      #   run: zip -r taxiBackEnd.zip ./
+      - name: zip file
+        run: zip -r taxiBackEnd.zip ./
 
-      # - name: Configure AWS Credentials
-      #   uses: aws-actions/configure-aws-credentials@v1
-      #   with:
-      #     role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE }}
-      #     aws-region: us-east-1
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE }}
+          aws-region: ap-northest-2
 
-      # - name: Upload to S3
-      #   working-directory: ./
-      #   run: aws s3 cp --region ap-northeast-2 ./taxiBackEnd.zip s3://taxi-backend/taxiBackend-deploy/
+      - name: Upload to S3
+        working-directory: ./
+        run: aws s3 cp --region ap-northeast-2 ./taxiBackEnd.zip s3://taxi-server/taxiBackend-deploy/
 
-      # - name: deploy with AWS codeDeploy
-      #   working-directory: ./
-      #   run: aws deploy create-deployment
-      #     --application-name new-product-nestjs-server-deploy
-      #     --deployment-config-name CodeDeployDefault.OneAtATime
-      #     --deployment-group-name new-product-nestjs-server-deploy-group
-      #     --s3-location bucket=${{ secrets.AWS_S3_BUCKET_NAME }},bundleType=zip,key=new-product-nestjs-server-deploy/newProductBackEnd.zip
+      - name: deploy with AWS codeDeploy
+        working-directory: ./
+        run: aws deploy create-deployment
+          --application-name taxi-application
+          --deployment-config-name CodeDeployDefault.OneAtATime
+          --deployment-group-name taxi-group
+          --s3-location bucket=taxi-server, bundleType=zip,key=taxiBackend-deploy/taxiBackEnd.zip
