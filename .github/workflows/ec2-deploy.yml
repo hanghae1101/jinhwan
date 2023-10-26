@@ -41,9 +41,9 @@ jobs:
           pwd
           touch .env
 
-          echo KAKAO_REST_API_KEY=${{ env.KAKAO_REST_API_KEY }} >> .env
-          echo APP_ENV = ${{ env.APP_ENV }} >> .env
-          echo PORT = ${{ env.PORT }} >> .env
+          echo KAKAO_REST_API_KEY=${{ vars.KAKAO_REST_API_KEY }} >> .env
+          echo APP_ENV = ${{ vars.APP_ENV }} >> .env
+          echo PORT = ${{ vars.PORT }} >> .env
 
           cat .env
 
