@@ -55,6 +55,7 @@ jobs:
           role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE }}
           aws-region: ap-northeast-2
 
+
       - name: Upload to S3
         working-directory: ./
         run: aws s3 cp --region ap-northeast-2 ./taxiBackEnd.zip s3://taxi-server/taxiBackend-deploy/
