@@ -22,7 +22,6 @@ jobs:
     # env:
     #   working-directory: .
 
-
     strategy:
       matrix:
         node-version: [18.13.0]
@@ -42,9 +41,9 @@ jobs:
           pwd
           touch .env
 
-          echo KAKAO_REST_API_KEY=${{ secrets.KAKAO_REST_API_KEY }} >> .env
-          echo APP_ENV = ${{ secrets.KAKAO_REST_API_KEY }} >> .env
-          echo PORT = ${{ secrets.KAKAO_REST_API_KEY }} >> .env
+          echo KAKAO_REST_API_KEY=${{ env.KAKAO_REST_API_KEY }} >> .env
+          echo APP_ENV = ${{ env.APP_ENV }} >> .env
+          echo PORT = ${{ env.PORT }} >> .env
 
           cat .env
 
