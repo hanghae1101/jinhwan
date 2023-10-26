@@ -36,7 +36,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: create env file
-        # working-directory: ${{ env.working-directory }}
         run: |
           pwd
           touch .env
@@ -54,7 +53,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE }}
-          aws-region: ap-northest-2
+          aws-region: us-east-2
 
       - name: Upload to S3
         working-directory: ./
