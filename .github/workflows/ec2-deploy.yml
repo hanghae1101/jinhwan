@@ -54,7 +54,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE }}
-          aws-region: us-east-1
+          aws-region: ap-northeast-2
 
       - name: Upload to S3
         working-directory: ./
@@ -66,4 +66,4 @@ jobs:
           --application-name taxi-application
           --deployment-config-name CodeDeployDefault.OneAtATime
           --deployment-group-name taxi-group
-          --s3-location bucket=taxi-server, bundleType=zip,key=taxiBackend-deploy/taxiBackEnd.zip
+          --s3-location bucket=taxi-server, bundleType=zip, key=taxiBackend-deploy/taxiBackEnd.zip
