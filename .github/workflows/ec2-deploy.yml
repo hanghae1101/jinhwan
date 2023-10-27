@@ -66,4 +66,4 @@ jobs:
           --application-name taxi-application
           --deployment-config-name CodeDeployDefault.OneAtATime
           --deployment-group-name taxi-group
-          --s3-location bucket=taxi-server, bundleType=zip, key=taxiBackend-deploy/taxiBackEnd.zip
+          --s3-location bucket=taxi-server,bundleType=zip,key=taxiBackend-deploy/taxiBackEnd.zip
