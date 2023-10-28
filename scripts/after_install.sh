@@ -9,7 +9,7 @@ echo '============================'
 echo 'Running install_dependencies'
 echo '============================'
 
-REPOSITORY=/ubuntu/home/server
+REPOSITORY=/home/ubuntu/server
 
 cd $REPOSITORY
 
@@ -17,7 +17,7 @@ sudo chmod -R 777 $REPOSITORY
 
 npm install
 
-docker-compose -f /ubuntu/home/server/docker-compose.yaml up -d
+docker-compose -f /home/ubuntu/server/docker-compose.yaml up -d
 
 
 
