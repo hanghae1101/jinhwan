@@ -17,7 +17,7 @@ sudo chmod -R 777 $REPOSITORY
 
 npm install
 
-docker-compose -f /ubuntu/home/server/docker-compose.yaml up -d
+docker-compose -f /home/ubuntu/server/docker-compose.yml up -d
 
 
 
