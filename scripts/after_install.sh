@@ -9,7 +9,7 @@ echo '============================'
 echo 'Running install_dependencies'
 echo '============================'
 
-REPOSITORY=/ubuntu/home/server
+REPOSITORY=/home/ubuntu/server
 
 cd $REPOSITORY
 
