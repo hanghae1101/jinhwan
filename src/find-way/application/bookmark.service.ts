@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { IBookmark } from '../domain/bookmark.interface';
-import { Bookmark } from '../entities/bookmark.entity';
+import { Bookmark } from '../../app/entity/bookmark.entity';
 
 @Injectable()
 export class BookmarkService {

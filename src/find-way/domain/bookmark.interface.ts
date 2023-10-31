@@ -1,4 +1,4 @@
-import { Bookmark } from '../entities/bookmark.entity';
+import { Bookmark } from '../../app/entity/bookmark.entity';
 
 export interface IBookmark {
 	post(body: Bookmark): Promise<any>;
