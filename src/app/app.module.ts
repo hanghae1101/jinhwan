@@ -4,7 +4,7 @@ import { AppController } from './app.controller';
 import { FindWayModule } from '../find-way/find-way.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Bookmark } from '../find-way/entities/bookmark.entity';
+import { Bookmark } from './entity/bookmark.entity';
 import { MatchingModule } from 'src/matching/matching.module';
 import { Driver } from './entity/driver.entity';
 

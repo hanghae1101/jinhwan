@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, DeepPartial, InsertResult, Repository } from 'typeorm';
-import { Bookmark } from '../entities/bookmark.entity';
+import { Bookmark } from '../../app/entity/bookmark.entity';
 import { IBookmark } from '../domain/bookmark.interface';
 
 @Injectable()
