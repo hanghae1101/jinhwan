@@ -13,6 +13,7 @@ export class PaymentService {
 
 		const payment: Payment = new Payment();
 		payment.card_company = createPaymentDto.card_company;
+		payment.card_name = createPaymentDto.card_name;
 		payment.card_number = createPaymentDto.card_number;
 
 		await this.paymentRepository.insertPayment(payment);

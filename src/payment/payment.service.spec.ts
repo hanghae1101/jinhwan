@@ -23,14 +23,14 @@ describe('PaymentService', () => {
 	});
 
 	it('[실패] 결제 정보 추가 - 중복 에러', () => {
-		const mockCreateDto: CreatePaymentDto = { card_company: '신한카드', card_number: '1111222233334444' };
+		const mockCreateDto: CreatePaymentDto = { card_company: '신한카드', card_name: '신한카드 Deep Oil', card_number: '1111222233334444' };
 		paymentRepository.findByNumber = jest.fn().mockResolvedValue(mockCreateDto);
 
 		expect(() => service.create(mockCreateDto)).rejects.toThrowError(new ConflictException());
 	});
 
 	it('[성공] 결제 정보 추가', async () => {
-		const mockCreateDto: CreatePaymentDto = { card_company: '신한카드', card_number: '1111222233334444' };
+		const mockCreateDto: CreatePaymentDto = { card_company: '신한카드', card_name: '신한카드 Deep Oil', card_number: '1111222233334444' };
 		await service.create(mockCreateDto);
 
 		expect(paymentRepository.insertPayment).toBeCalledTimes(1);
