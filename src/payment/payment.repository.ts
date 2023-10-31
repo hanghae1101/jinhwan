@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { IPayment } from './payment.interface';
 import { DataSource, Repository } from 'typeorm';
 import { Payment } from '../app/entity/payment.entity';
+import { UpdatePaymentDto } from './dtos/update.payment.dto';
 
 @Injectable()
 export class PaymentRepository extends Repository<Payment> implements IPayment {
@@ -9,10 +10,20 @@ export class PaymentRepository extends Repository<Payment> implements IPayment {
 		super(Payment, dataSource.createEntityManager());
 	}
 
-	findByNumber(card_number: string): Promise<Payment | null> {
-		return this.findOne({ where: { card_number: card_number } });
+	async findByNumber(number: string): Promise<Payment | null> {
+		return await this.findOne({ where: { card_number: number } });
 	}
-	insertPayment(payment: Payment): void {
-		this.insert(payment);
+
+	async findById(id: number): Promise<Payment | null> {
+		return await this.findOne({ where: { id: id } });
+	}
+
+	async insertPayment(payment: Payment) {
+		await this.insert(payment);
+	}
+
+	async updatePayment(payment: Payment) {
+		const { id, ...newInput } = payment;
+		await this.update({ id: id }, { ...newInput });
 	}
 }

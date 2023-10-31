@@ -1,7 +1,8 @@
-import { ConflictException, Inject, Injectable } from '@nestjs/common';
+import { ConflictException, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { IPayment } from './payment.interface';
 import { Payment } from '../app/entity/payment.entity';
 import { CreatePaymentDto } from './dtos/create.payment.dto';
+import { UpdatePaymentDto } from './dtos/update.payment.dto';
 
 @Injectable()
 export class PaymentService {
@@ -17,5 +18,19 @@ export class PaymentService {
 		payment.card_number = createPaymentDto.card_number;
 
 		await this.paymentRepository.insertPayment(payment);
+	}
+
+	async update(updatePaymentDto: UpdatePaymentDto) {
+		const paymentEntity: Payment | null = await this.paymentRepository.findById(updatePaymentDto.id);
+
+		if (!paymentEntity) throw new NotFoundException();
+
+		const payment: Payment = new Payment();
+		payment.id = updatePaymentDto.id;
+		payment.card_company = updatePaymentDto.card_company;
+		payment.card_name = updatePaymentDto.card_name;
+		payment.card_number = updatePaymentDto.card_number;
+
+		await this.paymentRepository.updatePayment(payment);
 	}
 }
