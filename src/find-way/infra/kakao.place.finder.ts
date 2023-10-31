@@ -29,7 +29,8 @@ export class KakaoPlaceFinder implements PlaceFinder {
 
         return res;
       } catch (err) {
-        throw new Error(err);
+        if (typeof err === 'string')
+          throw new Error(err);
       }
     }
 

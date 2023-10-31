@@ -1,4 +1,4 @@
-import { Driver } from 'src/app/entity/driver.entity';
+import { Driver } from 'src/entity/driver.entity';
 
 export interface IMatching {
 	findWaitingDriver(): Promise<any>;

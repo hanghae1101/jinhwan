@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Driver, driverStatus } from '../../app/entity/driver.entity';
+import { Driver, driverStatus } from '../../entity/driver.entity';
 import { DataSource, Repository } from 'typeorm';
 
 @Injectable()
