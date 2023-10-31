@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { IPayment } from './payment.interface';
 import { DataSource, Repository } from 'typeorm';
 import { Payment } from '../app/entity/payment.entity';
-import { UpdatePaymentDto } from './dtos/update.payment.dto';
 
 @Injectable()
 export class PaymentRepository extends Repository<Payment> implements IPayment {
@@ -25,5 +24,9 @@ export class PaymentRepository extends Repository<Payment> implements IPayment {
 	async updatePayment(payment: Payment) {
 		const { id, ...newInput } = payment;
 		await this.update({ id: id }, { ...newInput });
+	}
+
+	async deletePayment(id: number) {
+		await this.delete(id);
 	}
 }

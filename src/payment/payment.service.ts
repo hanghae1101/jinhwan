@@ -33,4 +33,12 @@ export class PaymentService {
 
 		await this.paymentRepository.updatePayment(payment);
 	}
+
+	async delete(id: number) {
+		const paymentEntity: Payment | null = await this.paymentRepository.findById(id);
+
+		if (!paymentEntity) throw new NotFoundException();
+
+		await this.paymentRepository.deletePayment(id);
+	}
 }

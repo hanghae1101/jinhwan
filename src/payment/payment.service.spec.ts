@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PaymentService } from './payment.service';
 import { IPayment } from './payment.interface';
-import { ConflictException } from '@nestjs/common';
+import { ConflictException, NotFoundException } from '@nestjs/common';
 import { CreatePaymentDto } from './dtos/create.payment.dto';
 import { UpdatePaymentDto } from './dtos/update.payment.dto';
 
@@ -10,6 +10,7 @@ class MockPaymentRepository implements IPayment {
 	findById = jest.fn();
 	insertPayment = jest.fn();
 	updatePayment = jest.fn();
+	deletePayment = jest.fn();
 }
 
 describe('PaymentService', () => {
@@ -43,7 +44,7 @@ describe('PaymentService', () => {
 		const mockUpdateDto: UpdatePaymentDto = { id: 1, card_number: '5555222233334444' };
 		paymentRepository.findById = jest.fn().mockResolvedValue(null);
 
-		expect(async () => await service.update(mockUpdateDto)).rejects.toThrowError();
+		expect(async () => await service.update(mockUpdateDto)).rejects.toThrowError(new NotFoundException());
 	});
 
 	it('[성공] 결제 정보 변경', async () => {
@@ -55,8 +56,19 @@ describe('PaymentService', () => {
 		expect(paymentRepository.updatePayment).toBeCalledTimes(1);
 	});
 
-	it.todo('[실패] 결제 정보 삭제 - 결제 정보 에러');
-	it.todo('[성공] 결제 정보 삭제');
+	it('[실패] 결제 정보 삭제 - 결제 정보 에러', async () => {
+		paymentRepository.findById = jest.fn().mockResolvedValue(null);
+		expect(async () => await service.delete(1)).rejects.toThrowError(new NotFoundException());
+	});
+
+	it('[성공] 결제 정보 삭제', async () => {
+		paymentRepository.findById = jest
+			.fn()
+			.mockResolvedValue({ id: 1, card_company: '신한카드', card_name: '신한카드 Deep Oil', card_number: '1111222233334444' });
+
+		await service.delete(1);
+		expect(paymentRepository.deletePayment).toBeCalledTimes(1);
+	});
 
 	it.todo('결제 요청');
 });
