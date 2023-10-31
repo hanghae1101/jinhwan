@@ -5,10 +5,13 @@ import { FindWayModule } from '../find-way/find-way.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Bookmark } from '../find-way/entities/bookmark.entity';
+import { MatchingModule } from 'src/matching/matching.module';
+import { Driver } from './entity/driver.entity';
 
 @Module({
 	imports: [
 		FindWayModule,
+		MatchingModule,
 		ConfigModule.forRoot({
 			envFilePath: '.env',
 			isGlobal: true,
@@ -20,7 +23,7 @@ import { Bookmark } from '../find-way/entities/bookmark.entity';
 			username: 'root',
 			password: 'password',
 			database: 'taxi',
-			entities: [Bookmark],
+			entities: [Bookmark, Driver],
 			synchronize: true,
 		}),
 	],
