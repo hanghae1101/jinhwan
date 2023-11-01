@@ -1,0 +1,3 @@
+export interface ILogSender {
+	sendLog(message: string, context?: any, stack?: any): void;
+}
