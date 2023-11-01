@@ -9,4 +9,9 @@ export class MatchingController {
 	matching(): Promise<any> {
 		return this.matchingService.matching();
 	}
+
+	@Post('/test')
+	test(): void {
+		return this.matchingService.logTest();
+	}
 }
