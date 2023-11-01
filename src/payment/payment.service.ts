@@ -3,6 +3,7 @@ import { IPayment } from './payment.interface';
 import { Payment } from '../app/entity/payment.entity';
 import { CreatePaymentDto } from './dtos/create.payment.dto';
 import { UpdatePaymentDto } from './dtos/update.payment.dto';
+import { DeletePaymentDto } from './dtos/delete.payment.dto';
 
 @Injectable()
 export class PaymentService {
@@ -34,11 +35,11 @@ export class PaymentService {
 		await this.paymentRepository.updatePayment(payment);
 	}
 
-	async delete(id: number) {
-		const paymentEntity: Payment | null = await this.paymentRepository.findById(id);
+	async delete(deletePaymentDto: DeletePaymentDto) {
+		const paymentEntity: Payment | null = await this.paymentRepository.findById(deletePaymentDto.id);
 
 		if (!paymentEntity) throw new NotFoundException();
 
-		await this.paymentRepository.deletePayment(id);
+		await this.paymentRepository.deletePayment(deletePaymentDto.id);
 	}
 }

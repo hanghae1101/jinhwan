@@ -4,6 +4,7 @@ import { IPayment } from './payment.interface';
 import { ConflictException, NotFoundException } from '@nestjs/common';
 import { CreatePaymentDto } from './dtos/create.payment.dto';
 import { UpdatePaymentDto } from './dtos/update.payment.dto';
+import { DeletePaymentDto } from './dtos/delete.payment.dto';
 
 class MockPaymentRepository implements IPayment {
 	findByNumber = jest.fn();
@@ -57,16 +58,18 @@ describe('PaymentService', () => {
 	});
 
 	it('[실패] 결제 정보 삭제 - 결제 정보 에러', async () => {
+		const mockDeleteDto: DeletePaymentDto = { id: 1 };
 		paymentRepository.findById = jest.fn().mockResolvedValue(null);
-		expect(async () => await service.delete(1)).rejects.toThrowError(new NotFoundException());
+		expect(async () => await service.delete(mockDeleteDto)).rejects.toThrowError(new NotFoundException());
 	});
 
 	it('[성공] 결제 정보 삭제', async () => {
+		const mockDeleteDto: DeletePaymentDto = { id: 1 };
 		paymentRepository.findById = jest
 			.fn()
 			.mockResolvedValue({ id: 1, card_company: '신한카드', card_name: '신한카드 Deep Oil', card_number: '1111222233334444' });
 
-		await service.delete(1);
+		await service.delete(mockDeleteDto);
 		expect(paymentRepository.deletePayment).toBeCalledTimes(1);
 	});
 
