@@ -7,21 +7,25 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Bookmark } from '../find-way/entities/bookmark.entity';
 import { MatchingModule } from 'src/matching/matching.module';
 import { Driver } from './entity/driver.entity';
+import { LoggerModule } from 'src/logger/logger.module';
+import configuration from '../config/app.config';
 
 @Module({
 	imports: [
 		FindWayModule,
 		MatchingModule,
 		ConfigModule.forRoot({
-			envFilePath: '.env',
 			isGlobal: true,
+			envFilePath: ['../config/.env'],
+			load: [configuration],
 		}),
+		LoggerModule,
 		TypeOrmModule.forRoot({
 			type: 'postgres',
-			host: 'postgres-db',
+			host: 'localhost',
 			port: 5432,
-			username: 'root',
-			password: 'password',
+			username: 'postgres',
+			password: 'postgres',
 			database: 'taxi',
 			entities: [Bookmark, Driver],
 			synchronize: true,
