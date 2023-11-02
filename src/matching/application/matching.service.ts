@@ -11,15 +11,16 @@ export class MatchingService {
 	) {}
 
 	async matching(): Promise<any> {
-		this.logger.debug({ spanId: 1, func: 'matching' }, 'logger.debug test');
-		this.logger.warn({ spanId: 2, func: 'matching' }, 'logger.warning test');
-		this.logger.verbose('logger.verbose test');
-
 		try {
-			throw new Error('logger.error test');
+			this.logger.debug('test message', { span: 1, param: { name: 'a' } });
+			this.logger.warn('test message', { span: 2, param: { name: 'a' } });
+			this.logger.info('test message', { span: 3, param: { name: 'a' } });
 		} catch (err) {
-			this.logger.error(err.message, err.trace);
+			return 0;
 		}
+
+		// this.logger.fatal('test message', { span: 4, param: { name: 'a' } });
+		// return { msg: 'hello' };
 		// const driverInfo = await this.matchingRepository.findWaitingDriver();
 		// return driverInfo;
 	}

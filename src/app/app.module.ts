@@ -16,7 +16,7 @@ import configuration from '../config/app.config';
 		MatchingModule,
 		ConfigModule.forRoot({
 			isGlobal: true,
-			envFilePath: ['../config/.env'],
+			envFilePath: ['src/config/.env'],
 			load: [configuration],
 		}),
 		LoggerModule,
