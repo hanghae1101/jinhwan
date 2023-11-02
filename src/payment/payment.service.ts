@@ -1,6 +1,6 @@
 import { ConflictException, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { IPayment } from './payment.interface';
-import { Payment } from '../app/entity/payment.entity';
+import { Payment } from '../entity/payment.entity';
 import { CreatePaymentDto } from './dtos/create.payment.dto';
 import { UpdatePaymentDto } from './dtos/update.payment.dto';
 import { DeletePaymentDto } from './dtos/delete.payment.dto';

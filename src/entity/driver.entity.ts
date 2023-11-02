@@ -9,6 +9,9 @@ export enum driverStatus {
 @Entity()
 export class Driver extends BasicEntity {
 	@Column()
+	name: string;
+
+	@Column()
 	vehicle: string;
 
 	@Column({
