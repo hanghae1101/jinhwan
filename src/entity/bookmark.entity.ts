@@ -4,9 +4,6 @@ import { BasicEntity } from './base.entity';
 
 @Entity()
 export class Bookmark extends BasicEntity {
-	@PrimaryGeneratedColumn()
-	id: number;
-
 	@Column()
 	placeName: string;
 

@@ -1,4 +1,4 @@
-import { Payment } from '../app/entity/payment.entity';
+import { Payment } from '../entity/payment.entity';
 
 export interface IPayment {
 	findByNumber(number: string): Promise<Payment | null>;
