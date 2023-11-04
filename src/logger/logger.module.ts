@@ -7,6 +7,7 @@ import * as FileStreamRotator from 'file-stream-rotator';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { HttpModule } from '@nestjs/axios';
 import { SlackSender } from './infra/slack.infra';
+import formattedTimestamp from '../util/format-timestamp';
 
 const infra = [{ provide: 'CloudWatchSender', useClass: CloudWatchSender }];
 
@@ -35,7 +36,7 @@ const infra = [{ provide: 'CloudWatchSender', useClass: CloudWatchSender }];
 							},
 						},
 						autoLogging: true,
-						timestamp: true,
+						timestamp: formattedTimestamp,
 						stream: pino.multistream([
 							{
 								stream: FileStreamRotator.getStream({
