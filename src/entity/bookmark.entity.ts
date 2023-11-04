@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Double } from 'typeorm';
-import { BasicEntity } from './base.entity';
+import { BasicEntity } from './basic.entity';
 // import { User } from './User';
 
 @Entity()
@@ -18,8 +18,4 @@ export class Bookmark extends BasicEntity {
 
 	@Column()
 	y: string;
-
-	//유저 엔티티랑 조인할 때 주석 해제하기
-	//   @ManyToOne(() => User, (user) => user.placeBookmark)
-	//   user: User;
 }

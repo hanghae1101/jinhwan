@@ -1,14 +1,11 @@
 import { Column, Entity } from 'typeorm';
-import { BasicEntity } from './base.entity';
+import { BasicEntity } from './basic.entity';
 
 @Entity()
-export class Driver extends BasicEntity {
+export class Call extends BasicEntity {
 	@Column()
 	userId: number;
 
-	@Column()
-	driverId: number;
-
-	@Column()
-	route: Object;
+	@Column('json')
+	route: any;
 }
