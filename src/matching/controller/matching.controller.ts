@@ -1,17 +1,13 @@
-import { Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { MatchingService } from '../application/matching.service';
+import { CreateOperationDto } from './dto/create-operation.dto';
 
 @Controller('matching')
 export class MatchingController {
 	constructor(private readonly matchingService: MatchingService) {}
 
 	@Post()
-	matching(): Promise<any> {
-		return this.matchingService.matching();
-	}
-
-	@Post('/test')
-	test(): void {
-		return this.matchingService.logTest();
+	matching(@Body() createOperationDto: CreateOperationDto): Promise<any> {
+		return this.matchingService.matching(createOperationDto);
 	}
 }
